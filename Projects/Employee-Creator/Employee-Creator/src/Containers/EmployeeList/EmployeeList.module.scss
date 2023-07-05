@@ -1,0 +1,20 @@
+.EmployeeList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.HeadingWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.Heading {
+    text-align: center;
+}
+
+.AddEmployee {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
