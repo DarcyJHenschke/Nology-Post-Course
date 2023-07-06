@@ -3,7 +3,18 @@
     align-items: center;
     justify-content: space-between;
     width: 60%;
-    border: 2px solid black;
+    margin-bottom: 3vh;
+    border-radius: 20px;
+    padding: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: lightgray;
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+}
+
+.ListItemContainer:hover {
+    top: -10px;
 }
 
 .EmployeeInfo {
@@ -11,4 +22,41 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.Name {
+    font-weight: bold;
+}
+
+.OtherInfo {
+    color: #696969;
+}
+
+.Edit {
+    background-color: #6495ed;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin: 5px;
+}
+.Edit:hover {
+    transform: scale(0.85);
+}
+
+.Remove {
+    background-color: red;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin: 5px;
+}
+
+.Remove:hover {
+    transform: scale(0.85);
 }

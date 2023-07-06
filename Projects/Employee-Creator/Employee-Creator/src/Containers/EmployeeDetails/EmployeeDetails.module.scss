@@ -1,0 +1,77 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    border-radius: 3px;
+}
+
+.EmployeeDetailsContainer {
+    margin-left: 3vw;
+}
+
+.BackButton {
+    all: unset;
+    border-radius: 5px;
+    background-color: white;
+    color: lightgrey;
+    border: 2px solid lightgrey;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.AddEmployeeForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.PersonalInfoForm {
+    width: 200px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.EmailForm {
+    width: 300px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.TelForm {
+    width: 250px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.AddressForm {
+    width: 350px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.ContractForm {
+    width: 100px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+.DateForm {
+    width: 150px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+.SubmitButton {
+    all: unset;
+    border-radius: 5px;
+    background-color: #9932cc;
+    color: white;
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+    padding: 15px;
+    margin: 15px;
+    width: 100px;
+    text-align: center;
+}
+
+.SubmitButton:hover {
+    top: -10px;
+}

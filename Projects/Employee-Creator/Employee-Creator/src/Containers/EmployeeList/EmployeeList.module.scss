@@ -18,3 +18,19 @@
     align-items: center;
     justify-content: space-evenly;
 }
+
+.AddEmployeeButton {
+    all: unset;
+    border-radius: 5px;
+    background-color: #9932cc;
+    color: white;
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+    padding: 15px;
+    margin: 15px;
+}
+
+.AddEmployeeButton:hover {
+    top: -10px;
+}

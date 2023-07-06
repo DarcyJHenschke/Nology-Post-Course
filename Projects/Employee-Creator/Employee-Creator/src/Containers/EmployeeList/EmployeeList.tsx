@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./EmployeeList.module.scss";
-import Data from "./../../backend/employees.js";
+import Data from "../../backend/employees.js";
 import ListItem from "../../Components/ListItem/ListItem";
+import { Link } from "react-router-dom";
 const EmployeeList = () => {
     return (
         <div className={styles.EmployeeList}>
@@ -9,16 +10,16 @@ const EmployeeList = () => {
                 <h1 className={styles.Heading}>Employee List</h1>
             </div>
             <div className={styles.AddEmployee}>
-                <p className={styles.EditDescription}>
-                    Please click on "edit" to find more details of each employee
-                </p>
-                <button className={styles.AddEmployeeButton}>
-                    Add Employee
-                </button>
+                <Link to="/AddEmployee">
+                    <button className={styles.AddEmployeeButton}>
+                        Add Employee
+                    </button>
+                </Link>
             </div>
 
-            {Data.map((x) => (
+            {Data.map((x, index) => (
                 <ListItem
+                    key={index}
                     name={x.firstName + " " + x.lastName}
                     contract={x.phoneNumber}
                     email={x.emailAddress}

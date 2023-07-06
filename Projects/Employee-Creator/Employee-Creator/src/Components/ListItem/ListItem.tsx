@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ListItem.module.scss";
+import { Link } from "react-router-dom";
 
 interface listInfo {
     name: string;
@@ -10,14 +11,16 @@ const ListItem = ({ name, contract, email }: listInfo) => {
     return (
         <div className={styles.ListItemContainer}>
             <div className={styles.EmployeeInfo}>
-                <p>{name}</p>
-                <p>{contract}</p>
-                <p>{email}</p>
+                <p className={styles.Name}>{name}</p>
+                <p className={styles.OtherInfo}>{contract}</p>
+                <p className={styles.OtherInfo}>{email}</p>
             </div>
             <div className={styles.UpdateEmployee}>
-                <span>Edit</span>
-                <span>|</span>
-                <span>Remove</span>
+                <Link to="/EditEmployee">
+                    <span className={styles.Edit}>Edit</span>
+                </Link>
+                <span> | </span>
+                <span className={styles.Remove}>Remove</span>
             </div>
         </div>
     );
