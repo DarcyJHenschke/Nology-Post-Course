@@ -3,7 +3,14 @@ import styles from "./EmployeeList.module.scss";
 import Data from "../../backend/employees.js";
 import ListItem from "../../Components/ListItem/ListItem";
 import { Link } from "react-router-dom";
-const EmployeeList = () => {
+import { deleteEmployee } from "../../Services/services";
+
+interface props {
+    employees: Array;
+    deleteEmployees: Function;
+}
+
+const EmployeeList = ({ employees, deleteEmployees }: props) => {
     return (
         <div className={styles.EmployeeList}>
             <div className={styles.HeadingWrapper}>
@@ -17,12 +24,14 @@ const EmployeeList = () => {
                 </Link>
             </div>
 
-            {Data.map((x, index) => (
+            {employees.map((x, index) => (
                 <ListItem
                     key={index}
+                    id={x.id}
                     name={x.firstName + " " + x.lastName}
-                    contract={x.phoneNumber}
+                    phoneNumber={x.phoneNumber}
                     email={x.emailAddress}
+                    deleteEmployees={deleteEmployees}
                 />
             ))}
         </div>

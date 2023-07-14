@@ -1,22 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./EmployeeDetails.module.scss";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import axios from "axios";
 
-const EmployeeDetails = () => {
-    const { register, handleSubmit } = useForm();
-    const nameValidation = {
-        required: true,
-        maxLength: 20,
-    };
-    const phoneValidation = {
-        minLength: 10,
-        maxLength: 10,
+interface props {
+    addEmployee: Function;
+}
+
+const EmployeeDetails = ({ addEmployee }: props) => {
+    const [post, setPost] = useState({
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        emailAddress: "",
+        phoneNumber: "",
+        address: "",
+        contractType: "Permanent",
+        startDate: "",
+        endDate: "",
+        ongoing: false,
+    });
+
+    const handleInput = (event) => {
+        setPost({ ...post, [event.target.id]: event.target.value });
+        console.log(post);
     };
 
-    const requiredValidation = {
-        required: true,
+    const onSubmit = (event) => {
+        event.preventDefault();
+        console.log(post);
+        // addEmployee(post);
+        axios
+            .post("http://localhost:8080/employee", { post })
+            .then((response) => console.log(response))
+            .catch((err) => console.log(err.response));
     };
+    const schema = yup
+        .object({
+            firstName: yup.string().required().max(13),
+            middleName: yup.string().required().max(13),
+            lastName: yup.string().required().max(13),
+            phoneNumber: yup.string().required().max(10),
+            emailAddress: yup.string().email().required(),
+            address: yup.string().required(),
+            contractType: yup.string().required(),
+            startDate: yup.date().required(),
+            endDate: yup.date(),
+            ongoing: yup.boolean(),
+        })
+        .required();
+
+    const {
+        register,
+        formState: { errors },
+    } = useForm({ resolver: yupResolver(schema) });
+
     return (
         <div className={styles.EmployeeDetailsContainer}>
             <div>
@@ -27,18 +68,13 @@ const EmployeeDetails = () => {
             </div>
             <div>
                 <h2 className={styles.FormHeading}>Personal Information</h2>
-                <form
-                    onSubmit={handleSubmit((data) => {
-                        console.log(data);
-                    })}
-                    className={styles.AddEmployeeForm}
-                >
+                <form onSubmit={onSubmit} className={styles.AddEmployeeForm}>
                     <label for="firtName">First Name</label>
                     <input
                         id="firstName"
-                        name="firstName"
                         placeholder="Darcy"
-                        {...(register("firstName"), nameValidation)}
+                        {...register("firstName")}
+                        onChange={handleInput}
                         className={styles.PersonalInfoForm}
                         type="text"
                     ></input>
@@ -46,9 +82,9 @@ const EmployeeDetails = () => {
                     <label for="middleName">Middle Name (if Applicable)</label>
                     <input
                         id="middleName"
-                        name="middleName"
                         placeholder="James"
-                        {...(register("middleName"), nameValidation)}
+                        {...register("middleName")}
+                        onChange={handleInput}
                         type="text"
                         className={styles.PersonalInfoForm}
                     ></input>
@@ -56,9 +92,9 @@ const EmployeeDetails = () => {
                     <label for="lastName">Last Name</label>
                     <input
                         id="lastName"
-                        name="lastName"
                         placeholder="Henschke"
-                        {...(register("lastName"), nameValidation)}
+                        {...register("lastName")}
+                        onChange={handleInput}
                         type="text"
                         className={styles.PersonalInfoForm}
                     ></input>
@@ -66,35 +102,35 @@ const EmployeeDetails = () => {
                     <label for="emailAddress">Email Address</label>
                     <input
                         id="emailAddress"
-                        name="emailAddress"
                         placeholder="dhenschke25@gmail.com"
                         {...register("emailAddress")}
+                        onChange={handleInput}
                         className={styles.EmailForm}
                         type="email"
                     ></input>
                     <label for="phoneNumber">Phone Number</label>
                     <input
                         id="phoneNumber"
-                        name="phoneNumber"
                         placeholder="0402171205"
-                        {...register("phoneNumber", phoneValidation)}
+                        {...register("phoneNumber")}
+                        onChange={handleInput}
                         className={styles.TelForm}
                         type="tel"
                     ></input>
                     <label for="address">Residential Address</label>
                     <input
                         id="address"
-                        name="address"
                         placeholder="10 Smith street, Brunswick, Victoria"
-                        {...register("address", requiredValidation)}
+                        {...register("address")}
+                        onChange={handleInput}
                         className={styles.AddressForm}
                         type="text"
                     ></input>
                     <label for="contractType">What is Contract Type</label>
                     <select
                         id="contractType"
-                        name="contractType"
-                        {...register("contractType", requiredValidation)}
+                        {...register("contractType")}
+                        onChange={handleInput}
                         className={styles.ContractForm}
                     >
                         <option value="permanent">Permanent</option>
@@ -103,16 +139,16 @@ const EmployeeDetails = () => {
                     <label for="startDate">Start Date</label>
                     <input
                         id="startDate"
-                        name="startDate"
-                        {...register("startDate", requiredValidation)}
+                        {...register("startDate")}
+                        onChange={handleInput}
                         className={styles.DateForm}
                         type="date"
                     ></input>
                     <label for="endDate">End Date</label>
                     <input
                         id="endDate"
-                        name="endDate"
-                        {...register("endDate", requiredValidation)}
+                        {...register("endDate")}
+                        onChange={handleInput}
                         className={styles.DateForm}
                         type="date"
                     ></input>
@@ -120,8 +156,8 @@ const EmployeeDetails = () => {
                         Ongoing
                         <input
                             id="ongoing"
-                            name="ongoing"
-                            {...register("ongoing?")}
+                            {...register("ongoing")}
+                            onChange={handleInput}
                             className={styles.OngoingForm}
                             type="checkbox"
                             value="ongoing"
