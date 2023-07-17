@@ -14,6 +14,7 @@ import {
 
 function App() {
     const [employees, setEmployees] = useState([]);
+    const [employee, setEmployee] = useState();
 
     const callEmployees = async () => {
         const employees = await getEmployees();
@@ -55,7 +56,15 @@ function App() {
                     path="/AddEmployee"
                     element={<EmployeeDetails addEmployee={addEmployee} />}
                 />
-                <Route path="/EditEmployee" element={<EditPage />} />
+                <Route
+                    path="/EditEmployee/:id"
+                    element={
+                        <EditPage
+                            editEmployee={editEmployee}
+                            employees={employees}
+                        />
+                    }
+                />
             </Routes>
         </BrowserRouter>
     );

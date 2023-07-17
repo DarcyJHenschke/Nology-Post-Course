@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from "axios";
 
 interface props {
     addEmployee: Function;
@@ -26,17 +25,12 @@ const EmployeeDetails = ({ addEmployee }: props) => {
 
     const handleInput = (event) => {
         setPost({ ...post, [event.target.id]: event.target.value });
-        console.log(post);
     };
 
     const onSubmit = (event) => {
         event.preventDefault();
         console.log(post);
-        // addEmployee(post);
-        axios
-            .post("http://localhost:8080/employee", { post })
-            .then((response) => console.log(response))
-            .catch((err) => console.log(err.response));
+        addEmployee(post);
     };
     const schema = yup
         .object({

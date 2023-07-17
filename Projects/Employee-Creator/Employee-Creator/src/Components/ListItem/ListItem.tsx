@@ -18,7 +18,7 @@ const ListItem = ({ name, phoneNumber, email, id, deleteEmployees }: props) => {
                 <p className={styles.OtherInfo}>{email}</p>
             </div>
             <div className={styles.UpdateEmployee}>
-                <Link to="/EditEmployee">
+                <Link to={`/EditEmployee/${id}`}>
                     <span className={styles.Edit}>Edit</span>
                 </Link>
                 <span> | </span>
